@@ -1,0 +1,25 @@
+﻿# Get the diffusers library 
+# pip install diffusers torch
+
+
+from diffusers import StableDiffusionPipeline
+import torch 
+
+
+# Load the fire model 
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+
+
+# Move to GPU if you're feelin' rich 
+pipe.to("cuda")
+
+
+# Function to generate that  image
+def text_to_image(prompt):
+    image = pipe(prompt).images[0]
+    image.save("output.png") 
+
+
+# Example usage prompt = "A futuristic cityscape at sunset "
+text_to_image(prompt)

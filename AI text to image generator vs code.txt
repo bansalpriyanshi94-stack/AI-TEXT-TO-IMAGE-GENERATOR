@@ -1,0 +1,50 @@
+﻿# Reformatting the text to make it readable as a .txt file with correct indentation and formatting for mobile viewing
+text_content = """AI Text-to-Image Generator
+
+
+import torch
+from diffusers import StableDiffusionPipeline
+from PIL import Image
+
+
+# Load the pre-trained model
+# You can choose different Stable Diffusion models from Hugging Face Hub
+# For example, "runwayml/stable-diffusion-v1-5" or "stabilityai/stable-diffusion-2-1"
+
+
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+
+
+# Move the pipeline to GPU if available for faster inference
+if torch.cuda.is_available():
+    pipe = pipe.to("cuda")
+else:
+    print("CUDA not available. Running on CPU, which may be slower.")
+
+
+# Define the text prompt
+prompt = "A majestic lion standing on a rocky cliff overlooking a stormy ocean, dramatic lighting, highly detailed, realistic"
+
+
+# Generate the image
+# You can adjust parameters like num_inference_steps, guidance_scale, etc.
+image = pipe(prompt).images[0]
+
+
+# Save or display the generated image
+image.save("generated_image.png")
+print("Image generated and saved as 'generated_image.png'")
+
+
+# Optionally, display the image
+# image.show()
+"""
+
+
+file_path = "/mnt/data/ai_text_to_image_generator_mobile_friendly.txt"
+with open(file_path, "w") as f:
+    f.write(text_content)
+
+
+file_path
